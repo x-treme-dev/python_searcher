@@ -9,13 +9,17 @@ from tkinter import messagebox
 from tkinter.messagebox import showerror, showwarning, showinfo
 
  
- 
-
 path = ''
 file = 'file'
 folder = 'folder'
 
-     
+def test_params():
+    global path
+    if not (test_name(path) and test_name(name.get()) ):
+       showerror(title="Error", message="Path or name is empty")
+    else:
+        start_program()
+       
 def start_program():
     global out_button 
     flag = False
@@ -23,6 +27,7 @@ def start_program():
        clean_textfield()
        for root, dirs, files in os.walk(path):
             for dir in dirs:
+                print (f'I`m looking for a folder by name `{name.get()}`')
                 if test_name(name.get()) and dir.lower().strip().startswith(name.get().lower().strip()):
                     results_text.insert(tk.INSERT, os.path.join(root,dir) + "\n")
                     flag = True
@@ -31,6 +36,7 @@ def start_program():
          clean_textfield()
          for root, dirs, files in os.walk(path):
             for file in files:
+                print (f'I`m looking for a file by name `{name.get()}`')
                 if test_name(name.get()) and file.lower().startswith(name.get().lower()):
                     results_text.insert(tk.INSERT, os.path.join(root,file) + "\n")
                     flag = True 
@@ -50,7 +56,7 @@ def get_directory():
         showinfo(title="Path to Directory or Disk", message="Selection canceled")
 
 def test_name(name):
-      if name == '' or name is None:
+      if len(name) == 0:
          return False
       else:
          return True
@@ -111,7 +117,7 @@ message_label.grid(row=5, column=1, columnspan=2, sticky=W)
 results_text = tk.Text(mainframe, width=35, height=10, wrap="word", font=Font)
 results_text.grid(row=6, column=1, columnspan=2, pady=20, sticky="n")
 #seventh row
-out_button = tk.Button(mainframe, text='To output all results', font=Font, command=start_program)
+out_button = tk.Button(mainframe, text='To output all results', font=Font, command=test_params)
 out_button.grid(row=7, column=1, columnspan=2, sticky=N)
  
 

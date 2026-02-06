@@ -12,6 +12,7 @@ from tkinter.messagebox import showerror, showwarning, showinfo
 path = ''
 file = 'file'
 folder = 'folder'
+ 
 
 def test_params():
     global path
@@ -30,6 +31,7 @@ def start_program():
                 print (f'I`m looking for a folder by name `{name.get()}`')
                 if test_name(name.get()) and dir.lower().strip().startswith(name.get().lower().strip()):
                     results_text.insert(tk.INSERT, os.path.join(root,dir) + "\n")
+                    results_cmd.insert(tk.INSERT, results_text.get("1.0", END).replace("/", "\\") )
                     flag = True
                     
     elif name_radio_btn() == 'file':
@@ -39,6 +41,7 @@ def start_program():
                 print (f'I`m looking for a file by name `{name.get()}`')
                 if test_name(name.get()) and file.lower().startswith(name.get().lower()):
                     results_text.insert(tk.INSERT, os.path.join(root,file) + "\n")
+                    results_cmd.insert(tk.INSERT, results_text.get("1.0", END).replace("/", "\\") )
                     flag = True 
     out_message(flag, name_radio_btn())
     
@@ -83,8 +86,8 @@ def finish():
 
 root = Tk()
 root.title("Find folder or file by name")
-root.geometry("520x550+400+50")
-root.maxsize(700, 600)
+root.geometry("520x800")
+root.maxsize(700, 1000)
 root.update_idletasks() 
 
 Font = font.Font(family= "Courier New", size=16, weight="normal", slant="roman")
@@ -116,9 +119,12 @@ message_label.grid(row=5, column=1, columnspan=2, sticky=W)
 #sexth row
 results_text = tk.Text(mainframe, width=35, height=10, wrap="word", font=Font)
 results_text.grid(row=6, column=1, columnspan=2, pady=20, sticky="n")
+
+results_cmd = tk.Text(mainframe, width=35, height=10, wrap="word", font=Font)
+results_cmd.grid(row=7, column=1, columnspan=2, pady=20, sticky="n")
 #seventh row
 out_button = tk.Button(mainframe, text='To output all results', font=Font, command=test_params)
-out_button.grid(row=7, column=1, columnspan=2, sticky=N)
+out_button.grid(row=8, column=1, columnspan=2, sticky=N)
  
 
 for child in mainframe.winfo_children(): 

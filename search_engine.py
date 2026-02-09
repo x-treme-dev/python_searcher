@@ -1,4 +1,4 @@
- import os
+import os
 import time
 from tkinter import *
 import tkinter as tk
@@ -93,8 +93,8 @@ def clean_textfield():
 
 root = tk.Tk()
 root.title("search_engine")
-root.geometry("620x800")
-root.maxsize(700, 1000)
+root.geometry("560x800")
+root.maxsize(600, 800)
 root.update_idletasks() 
 
 Font = font.Font(family= "Courier New", size=16, weight="normal", slant="roman")
